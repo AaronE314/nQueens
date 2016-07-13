@@ -19,17 +19,17 @@ public class Board {
 
     public void start() {
         //starts the solve with 0 queens
-        solve(0);
+        solve(0,0);
     }
 
     //solves the board
-    public boolean solve(int numQueens) {
+    public boolean solve(int numQueens,int row) {
         //checks if the current number of queens is equal to the max
         if (numQueens == size) {
             this.printBoard();
             return true;
         } else {
-            for (int i = 0; i < size; i++) {
+            for (int i = row; i < size; i++) {
                 for (int j = 0; j < size; j++) {
                     //if its a valid move
                     if (validMove(i, j) == 0) {
@@ -37,7 +37,7 @@ public class Board {
                         this.placeQueen(i, j, 0);
                         numQueens++;
                         //calles function again and checks if its true
-                        if (solve(numQueens)) {
+                        if (solve(numQueens, i+1)) {
                             return true;
                         } else {
                             //if its not it removes queen and trys again
